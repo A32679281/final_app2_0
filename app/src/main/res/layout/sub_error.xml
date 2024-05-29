@@ -11,26 +11,19 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="413dp"
-            android:layout_height="492dp"
+        <ImageButton
+            android:id="@+id/knock1"
+            android:layout_width="match_parent"
+            android:layout_height="312dp"
+            android:layout_marginTop="209dp"
+            android:layout_marginBottom="210dp"
+            android:onClick="onClick"
+            android:scaleType="fitXY"
             android:src="@drawable/wood_fish_on"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
-        <Button
-            android:id="@+id/knock"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="onClick"
-            android:text="knock"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
