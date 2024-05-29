@@ -1,26 +1,19 @@
 package com.example.final_app2_0;
 
-import static androidx.core.content.ContextCompat.getSystemService;
-
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.media.MediaPlayer;
-import android.media.SoundPool;
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.os.Handler;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.ImageView;
-
-import java.util.HashMap;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -29,9 +22,9 @@ import java.util.HashMap;
  */
 public class sub_error extends Fragment implements View.OnClickListener {
 
-    Uri uri;
 
-    Button btn;
+    ImageButton btn;
+
     private MediaPlayer mediaPlayer;
 
     // TODO: Rename parameter arguments, choose names that match
@@ -74,16 +67,19 @@ public class sub_error extends Fragment implements View.OnClickListener {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-        //uri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.woodfish);
+
 
 
 
     }
 
     private void playMusic() {
-        if (mediaPlayer == null) {
-            mediaPlayer = MediaPlayer.create(getActivity(), R.raw.woodfish);
+        if (mediaPlayer != null) {
+            mediaPlayer.stop();
+            mediaPlayer.release();
+            mediaPlayer = null;
         }
+        mediaPlayer = MediaPlayer.create(getActivity(), R.raw.woodfish);
         mediaPlayer.start();
     }
     public void onDestroy() {
@@ -102,14 +98,16 @@ public class sub_error extends Fragment implements View.OnClickListener {
         }
     }
 
+    @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.sub_error, container, false);
 
-        btn = view.findViewById(R.id.knock);
+        btn = view.findViewById(R.id.knock1);
         btn.setOnClickListener(this);
+
 
         return view;
 
@@ -122,8 +120,16 @@ public class sub_error extends Fragment implements View.OnClickListener {
         vb.vibrate(VibrationEffect.EFFECT_HEAVY_CLICK);
         //VibrationEffect ve = VibrationEffect.createOneShot(1000, VibrationEffect.EFFECT_HEAVY_CLICK);
         //vb.vibrate(VibrationEffect.createOneShot(1000, VibrationEffect.EFFECT_HEAVY_CLICK));
-
         vb.cancel();
+        btn.setImageResource(R.drawable.wood_fish_down);
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                btn.setImageResource(R.drawable.wood_fish_on);
+            }
+        }, 100);
+
         playMusic();
 
 
